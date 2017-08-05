@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Anastas course task</title>
+    <style>
+        .holder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0 auto;
+            width: 60vw;
+            height: 60vh;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: row;
+            width: 50%;
+            height: 49%;
+            flex-flow: wrap;
+        }
+
+        .result-holder {
+            width: 100%;
+            height: 60%;
+            background-color: #97FEA0;
+            text-align: center;
+        }
+
+        .holder > .grid-item:first-child .input-text {
+            width: 70%;
+        }
+
+        .type-button {
+            width: 25%;
+            height: 12%;
+            margin-left: auto;
+        }
+
+        .input-text {
+            width: 100%;
+            height: 10%;
+            display: inline-block;
+        }
+
+        @-moz-document url-prefix() {
+            .type-button {
+                height: 14%;
+            }
+
+            @media (max-width: 1067px) {
+                .input-text, .holder > .grid-item:first-child .input-text {
+                    width: inherit;
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="holder">
+    <div class="grid-item">
+        <input title="type here" class="input-text"/>
+        <input type="button" class="type-button"/>
+        <div class="result-holder">
+        </div>
+    </div>
+    <div class="grid-item">
+        <input title="type here" class="input-text"/>
+        <div class="result-holder">
+        </div>
+    </div>
+</div>
+<script>
+    Array.from(document.querySelectorAll('.grid-item')).forEach((item) => {
+        const button = item.querySelector('.type-button');
+        if (button) {
+            button.addEventListener('click', () => {
+                item.querySelector('.result-holder').textContent = item.querySelector('.input-text').value;
+            })
+        } else {
+            item.querySelector('.input-text').addEventListener('keyup', (evt) => {
+                item.querySelector('.result-holder').textContent = evt.target.value;
+            });
+        }
+    });
+</script>
+</body>
+</html>
